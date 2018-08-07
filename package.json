@@ -5,15 +5,16 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "runAndroid": "react-native run-android"
+    "runAndroid": "react-native run-android",
+    "gradlew": "cd android && gradlew clean && cd .. && react-native run-android"
   },
   "dependencies": {
-    "react": "16.4.1",
-    "react-native": "0.56.0"
+    "react": "^16.4.1",
+    "react-native": "^0.55.4"
   },
   "devDependencies": {
     "babel-jest": "23.4.2",
-    "babel-preset-react-native": "5",
+    "babel-preset-react-native": "^4.0.0",
     "jest": "23.4.2",
     "react-test-renderer": "16.4.1"
   },
