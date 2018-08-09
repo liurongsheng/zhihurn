@@ -9,6 +9,8 @@
     "gradlew": "cd android && gradlew clean && cd .. && react-native run-android"
   },
   "dependencies": {
+    "antd-mobile": "^2.2.2",
+    "axios": "^0.18.0",
     "react": "^16.4.1",
     "react-native": "^0.55.4"
   },
