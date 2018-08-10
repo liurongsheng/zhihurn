@@ -1,86 +1,75 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Button, Drawer, List, WhiteSpace } from 'antd-mobile-rn';
+import { View, Text } from 'react-native';
+import { TabBar, SearchBar } from 'antd-mobile-rn';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+export default class BasicTabBarExample extends React.Component<any, any> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      selectedTab: 'redTab',
+    };
+  }
 
-export default class DrawerExample extends React.Component<any, any> {
-  drawer: any;
+  renderContent(pageText: any) {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', backgroundColor: 'white' }}>
+        <SearchBar placeholder="Search" showCancelButton />
+        <Text style={{ margin: 50 }}>{pageText}</Text>
+      </View>
+    );
+  }
 
-  onOpenChange = (isOpen: any) => {
-    /* tslint:disable: no-console */
-    console.log('是否打开了 Drawer', isOpen.toString());
+  onChangeTab(tabName: any) {
+    this.setState({
+      selectedTab: tabName,
+    });
   }
 
   render() {
-    const itemArr = Array.apply(null, Array(20))
-      .map(function(_: any, i: any) {
-        return i;
-      })
-      .map((_i: any, index: any) => {
-        if (index === 0) {
-          return (
-            <List.Item
-              key={index}
-              thumb="https://zos.alipayobjects.com/rmsportal/eOZidTabPoEbPeU.png"
-              multipleLine
-            >
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}
-              >
-                <Text>Categories - {index}</Text>
-                <Button
-                  type="primary"
-                  size="small"
-                  onClick={() => this.drawer.closeDrawer()}
-                >
-                  close drawer
-                </Button>
-              </View>
-            </List.Item>
-          );
-        }
-        return (
-          <List.Item
-            key={index}
-            thumb="https://zos.alipayobjects.com/rmsportal/eOZidTabPoEbPeU.png"
-          >
-            <Text>Categories - {index}</Text>
-          </List.Item>
-        );
-      });
-
-    // Todo: https://github.com/DefinitelyTyped/DefinitelyTyped
-    const sidebar = (
-      <ScrollView >
-        <List>{itemArr}</List>
-      </ScrollView>
-    );
-
     return (
-      <Drawer
-        sidebar={sidebar}
-        position="left"
-        open={false}
-        drawerRef={(el: any) => (this.drawer = el)}
-        onOpenChange={this.onOpenChange}
-        drawerBackgroundColor="#ccc"
+      <TabBar
+        unselectedTintColor="#949494"
+        tintColor="#33A3F4"
+        barTintColor="#ccc"
       >
-        <View style={{ flex: 1, marginTop: 114, padding: 8 }}>
-          <Button onClick={() => this.drawer && this.drawer.openDrawer()}>
-            Open drawer
-          </Button>
-          <WhiteSpace />
-        </View>
-      </Drawer>
+        <TabBar.Item
+          title="Home"
+          icon={require('../img/icon/panda(1).png')}
+          selectedIcon={require('../img/icon/panda(5).png')}
+          selected={this.state.selectedTab === 'blueTab'}
+          onPress={() => this.onChangeTab('blueTab')}
+        >
+          {this.renderContent('Life Tab')}
+        </TabBar.Item>
+        <TabBar.Item
+          icon={require('../img/icon/panda(2).png')}
+          selectedIcon={require('../img/icon/panda(5).png')}
+          title="Article"
+          badge={2}
+          selected={this.state.selectedTab === 'redTab'}
+          onPress={() => this.onChangeTab('redTab')}
+        >
+          {this.renderContent('Koubei Tab')}
+        </TabBar.Item>
+        <TabBar.Item
+          icon={require('../img/icon/panda(3).png')}
+          selectedIcon={require('../img/icon/panda(5).png')}
+          title="Friend"
+          selected={this.state.selectedTab === 'greenTab'}
+          onPress={() => this.onChangeTab('greenTab')}
+        >
+          {this.renderContent('Friend Tab')}
+        </TabBar.Item>
+        <TabBar.Item
+          icon={require('../img/icon/panda(4).png')}
+          selectedIcon={require('../img/icon/panda(5).png')}
+          title="My"
+          selected={this.state.selectedTab === 'yellowTab'}
+          onPress={() => this.onChangeTab('yellowTab')}
+        >
+          {this.renderContent('My Tab')}
+        </TabBar.Item>
+      </TabBar>
     );
   }
 }
